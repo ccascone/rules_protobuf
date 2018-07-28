@@ -21,7 +21,6 @@ def cpp_proto_repositories(
   rem = proto_repositories(lang_deps = lang_deps,
                            lang_requires = lang_requires,
                            **kwargs)
-
   for dep in rem:
     rule = dep.pop("rule")
     if "grpc_repository" == rule:
@@ -97,7 +96,7 @@ def cpp_proto_library(
   native.cc_library(
     name = name,
     srcs = srcs + [name + ".pb"],
-    deps = list(set(deps + proto_deps + compile_deps)),
+    deps = list(depset(deps + proto_deps + compile_deps)),
     **kwargs)
 
 # Alias for cpp_proto_library
